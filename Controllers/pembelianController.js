@@ -97,9 +97,7 @@ exports.updateStatusPesanan = async (req, res) => {
 exports.getPembelianByStatus = async (req, res) => {
     try {
         const { status } = req.query; 
-        console.log("Mencari pesanan dengan status:", status);
         const pesanan = await Pembelian.getPembelianByStatus(status);
-        console.log("Hasil query dari model:", pesanan);
         res.json(pesanan);
     } catch (error) { 
         console.error("Gagal mengambil pesanan berdasarkan status:", error);

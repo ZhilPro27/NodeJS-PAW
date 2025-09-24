@@ -102,7 +102,6 @@ exports.logs = async (req, res) => {
 
   try {
     const logs = await Log.getAllLogs(page, limit);
-    console.log(logs);
     res.json(logs);
   } catch (error) {
     console.error("Gagal memuat log:", error);

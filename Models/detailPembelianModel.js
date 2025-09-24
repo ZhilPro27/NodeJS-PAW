@@ -6,7 +6,18 @@ const detailPembelian = {
     },
 
     getDetailPembelianById: (id, callback) => {
-        db.query("SELECT * FROM detail_pembelian WHERE id = ?", [id], callback);
+        db.query(`SELECT 
+                b.namaBarang,
+                b.hargaBarang,
+                dp.jumlahBarang,
+                dp.totalHargaBarang
+            FROM 
+                detail_pembelian dp
+            JOIN 
+                barang b ON dp.idBarang = b.idBarang
+            WHERE 
+                dp.idPembelian = ?;
+        `, [id], callback);
     },
 
     updateDetailPembelian: (id, detailPembelianData, callback) => {

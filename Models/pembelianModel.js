@@ -147,8 +147,22 @@ const Pembelian = {
     }
   },
 
-  getPembelianByStatus: async (status) => {
-    const sql = "SELECT p.*, u.nama as namaUser FROM pembelian p JOIN users u ON p.userId = u.id WHERE p.status = ? ORDER BY p.waktuTransaksi DESC";
+};
+
+Pembelian.getPembelianByStatus = async (status) => {
+    const sql = `
+      SELECT 
+        p.idPembelian, 
+        p.waktuTransaksi, 
+        p.totalHarga, 
+        p.status, 
+        u.nama as namaUser,
+        u.email 
+      FROM pembelian p 
+      LEFT JOIN users u ON p.userId = u.id 
+      WHERE p.status = ? 
+      ORDER BY p.waktuTransaksi DESC
+    `;
     try {
       const [rows] = await db.promise().query(sql, [status]);
       return rows;
@@ -156,8 +170,6 @@ const Pembelian = {
       throw error;
     }
   },
-
-};
 
 Pembelian.generateNextPembelianId = async () => {
   const [rows] = await db.promise().query(
