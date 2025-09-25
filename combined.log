@@ -1,0 +1,4 @@
+{"level":"info","message":"Upaya login untuk user: Admin","service":"user-service","timestamp":"2025-09-25 20:28:11"}
+{"level":"info","message":"Login berhasil untuk admin: Admin","service":"user-service","timestamp":"2025-09-25 20:28:11"}
+{"level":"info","message":"Upaya login untuk user: zhilal@mail.com","service":"user-service","timestamp":"2025-09-25 20:29:10"}
+{"level":"info","message":"Login berhasil untuk user: zhilal@mail.com","service":"user-service","timestamp":"2025-09-25 20:29:10"}

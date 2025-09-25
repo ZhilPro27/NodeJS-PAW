@@ -3,11 +3,13 @@ const User = require('../Models/userModel');
 const Log = require('../Models/logModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const logger = require('../config/logger');
 
 exports.login = async (req, res) => {
   try {
     const { username, password } = req.body;
     const ip_address = req.ip;
+    logger.info(`Upaya login untuk user: ${username}`);
     
     const admin = await Admin.getAdminByUsername(username);
     if (admin) {
@@ -19,6 +21,7 @@ exports.login = async (req, res) => {
           "your_super_secret_jwt_key", 
           { expiresIn: '1h' }
         );
+        logger.info(`Login berhasil untuk admin: ${username}`);
         return res.json({ token, user: { id: admin.id, username: admin.username, role: 'admin' } });
       }
     }
@@ -33,14 +36,16 @@ exports.login = async (req, res) => {
           "your_super_secret_jwt_key",
           { expiresIn: '8h' }
         );
+        logger.info(`Login berhasil untuk user: ${username}`);
         return res.json({ token, user: { id: user.id, email: user.email, nama: user.nama, role: 'user' } });
       }
     }
-
+    logger.warn(`Login gagal untuk user: ${username}`);
     return res.status(401).json({ message: "Kredensial tidak valid." });
 
   } catch (error) {
     console.error("Login gagal:", error);
+    logger.error(`Error saat login: ${error.message}`, { stack: error.stack });
     res.status(500).json({ message: "Terjadi kesalahan pada server." });
   }
 };

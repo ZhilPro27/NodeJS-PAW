@@ -10,6 +10,7 @@
   "description": "",
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "belajar-nodejs-npm-library-gheo": "^1.0.0",
     "belajar-nodejs-npm-library-zhilal": "^1.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.2",
@@ -20,7 +21,8 @@
     "mysql2": "^3.14.5",
     "path": "^0.12.7",
     "pdfmake": "^0.2.20",
-    "roboto-font": "^0.1.0"
+    "roboto-font": "^0.1.0",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "jest": "^30.1.3"
